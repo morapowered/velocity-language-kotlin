@@ -15,6 +15,11 @@ jobs:
         with:
           java-version: 17
           distribution: 'temurin'
+      - name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_SECRET_KEY }}
+          passphrase: ${{ secrets.GPG_PASSPHRASE }}
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
@@ -25,6 +30,6 @@ jobs:
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
-          GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
-          GPG_SECRET_KEY: ${{ secrets.GPG_SECRET_KEY }}
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        #  GPG_KEY_ID: ${{ secrets.GPG_KEY_ID }}
+        #  GPG_SECRET_KEY: ${{ secrets.GPG_SECRET_KEY }}
+        #  GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
