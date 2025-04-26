@@ -1,34 +1,48 @@
 plugins {
-  kotlin("jvm")
-  kotlin("kapt")
-  kotlin("plugin.serialization")
-  id("com.github.johnrengelman.shadow")
+  alias(libs.plugins.kotlinJvm)
+  alias(libs.plugins.kotlinKapt)
+  alias(libs.plugins.kotlinPluginSerialization)
+  alias(libs.plugins.shadow)
 }
 
-val kotlinVersion: String by project
-val velocityVersion: String by project
+val pluginVersion: String by project
+val kotlinVersion = libs.versions.kotlin.get()
+val velocityVersion = libs.versions.velocity.get()
 
-group = "com.velocitypowered"
-version = "$velocityVersion+$kotlinVersion"
+group = "io.github.morapowered"
+version = "$pluginVersion+kotlin.$kotlinVersion"
 
 repositories {
-  mavenLocal()
   mavenCentral()
-
-  maven("https://repo.velocitypowered.com/snapshots/")
+  maven("https://repo.papermc.io/repository/maven-public/")
+  mavenLocal()
 }
 
 dependencies {
-  implementation(kotlin("reflect"))
-  implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.1")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinVersion")
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:$kotlinVersion")
-  implementation("net.kyori:adventure-extra-kotlin:4.7.0")
+  compileOnly(libs.velocityApi)
+  kapt(libs.velocityApi)
 
-  compileOnly("com.velocitypowered:velocity-api:$velocityVersion")
-  kapt("com.velocitypowered:velocity-annotation-processor:$velocityVersion")
+  implementation(libs.bundles.kotlinLibraries)
+  implementation(libs.adventureExtraKotlin)
+  implementation(libs.configurateExtraKotlin)
 }
 
-tasks.build {
-  dependsOn(tasks.shadowJar.get())
+java {
+  sourceCompatibility = JavaVersion.VERSION_1_8
+  targetCompatibility = JavaVersion.VERSION_1_8
+
+  withSourcesJar()
+  withJavadocJar()
 }
+
+tasks {
+  build {
+    dependsOn(shadowJar)
+  }
+
+  withType<JavaCompile> {
+    options.release.set(17)
+    options.encoding = "UTF-8"
+  }
+}
+

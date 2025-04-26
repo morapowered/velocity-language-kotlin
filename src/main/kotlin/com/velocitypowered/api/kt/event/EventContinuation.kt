@@ -1,7 +1,6 @@
 package com.velocitypowered.api.kt.event
 
 import com.google.common.reflect.TypeToken
-import com.velocitypowered.api.event.Event
 import com.velocitypowered.api.event.EventManager
 import com.velocitypowered.api.event.EventTask
 import org.slf4j.Logger
@@ -20,7 +19,7 @@ internal fun EventManager.registerCoroutineContinuationAdapter(logger: Logger) {
   try {
     registerHandlerAdapter(
       name = "kt_suspend",
-      filter = filter@ { method ->
+      filter = filter@{ method ->
         val function = method.kotlinFunction
           ?: return@filter false
         function.isSuspend
@@ -35,7 +34,7 @@ internal fun EventManager.registerCoroutineContinuationAdapter(logger: Logger) {
           errors.add("function return type must be Unit")
         }
       },
-      invokeFunctionType = object : TypeToken<suspend (Any, Event) -> Unit>() {},
+      invokeFunctionType = object : TypeToken<suspend (Any, Any) -> Unit>() {},
       handlerBuilder = { invokeFunction ->
         BiFunction { instance, event ->
           suspendingEventTask {
@@ -54,14 +53,18 @@ internal fun <F> EventManager.registerHandlerAdapter(
   filter: Predicate<Method>,
   validator: BiConsumer<Method, MutableList<String>>,
   invokeFunctionType: TypeToken<F>,
-  handlerBuilder: Function<F, BiFunction<Any, Event, EventTask>>
+  handlerBuilder: Function<F, BiFunction<Any, Any, EventTask>>
 ) {
   try {
-    val method = javaClass.getMethod("registerHandlerAdapter", String::class.java,
-      Predicate::class.java, BiConsumer::class.java, TypeToken::class.java, Function::class.java)
+    val method = javaClass.getMethod(
+      "registerHandlerAdapter", String::class.java,
+      Predicate::class.java, BiConsumer::class.java, TypeToken::class.java, Function::class.java
+    )
     method.invoke(this, name, filter, validator, invokeFunctionType, handlerBuilder)
   } catch (ex: NoSuchMethodException) {
-    throw UnsupportedOperationException("The registerHandlerAdapter method couldn't be found"
-        + " in VelocityEventManager, handler adapters aren't supported.", ex)
+    throw UnsupportedOperationException(
+      "The registerHandlerAdapter method couldn't be found"
+          + " in VelocityEventManager, handler adapters aren't supported.", ex
+    )
   }
 }

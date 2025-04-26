@@ -1,0 +1,52 @@
+[versions]
+velocity = "3.4.0-SNAPSHOT"
+kotlin = "2.1.20"
+shadow = "8.1.1"
+coroutines = "1.10.1"
+serialization = "1.8.0"
+atomicFu = "0.27.0"
+datetime = "0.6.2"
+kotlinxIo = "0.7.0"
+adventureExtraKotlin = "4.7.0"
+configurate = "4.2.0"
+
+[libraries]
+# Velocity
+velocityApi = { group = "com.velocitypowered", name = "velocity-api", version.ref = "velocity" }
+
+# Kotlin
+stdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+stdlibJdk8 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk8", version.ref = "kotlin" }
+stdlibJdk7 = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib-jdk7", version.ref = "kotlin" }
+stdlibReflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
+
+# Kotlinx Coroutines
+coroutinesCore = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "coroutines" }
+coroutinesCoreJvm = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core-jvm", version.ref = "coroutines" }
+coroutinesJdk8 = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-jdk8", version.ref = "coroutines" }
+
+# Kotlinx Serialzation
+serializationCore = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core-jvm", version.ref = "serialization" }
+serializationJson = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json-jvm", version.ref = "serialization" }
+serializationCbor = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-cbor-jvm", version.ref = "serialization" }
+
+# Kotlinx
+atomicFu = { group = "org.jetbrains.kotlinx", name = "atomicfu-jvm", version.ref = "atomicFu" }
+datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime-jvm", version.ref = "datetime" }
+ioCore = { group = "org.jetbrains.kotlinx", name = "kotlinx-io-core-jvm", version.ref = "kotlinxIo" }
+ioBytestring = { group = "org.jetbrains.kotlinx", name = "kotlinx-io-bytestring-jvm", version.ref = "kotlinxIo" }
+
+# Others
+adventureExtraKotlin = { group = "net.kyori", name = "adventure-extra-kotlin", version.ref = "adventureExtraKotlin" }
+configurateExtraKotlin = { group = "org.spongepowered", name = "configurate-extra-kotlin", version.ref = "configurate" }
+
+[plugins]
+kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlinPluginSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
+
+[bundles]
+kotlinLibraries = ["stdlib", "stdlibJdk7", "stdlibJdk8", "stdlibReflect", "coroutinesCore",
+  "coroutinesCoreJvm", "coroutinesJdk8", "serializationCore", "serializationJson",
+  "serializationCbor", "atomicFu", "datetime", "ioCore", "ioBytestring"]

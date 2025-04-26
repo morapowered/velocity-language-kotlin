@@ -1,21 +1,20 @@
 package com.velocitypowered.api.kt.event
 
-import com.velocitypowered.api.event.Event
 import com.velocitypowered.api.event.EventManager
 import com.velocitypowered.api.event.EventTask
 import com.velocitypowered.api.event.PostOrder
-import com.velocitypowered.api.event.Continuation as EventContinuation
 import kotlin.coroutines.Continuation
 import kotlin.coroutines.EmptyCoroutineContext
 import kotlin.coroutines.startCoroutine
+import com.velocitypowered.api.event.Continuation as EventContinuation
 
 /**
  * Registers an event listener for the event [E] for the given [plugin]. The listener will use a
  * suspended coroutine, allowing you to use a coroutine context to process the event in a
  * non-blocking way.
  */
-inline fun <reified E : Event> EventManager.on(
-  plugin: Any, order: Short = PostOrder.NORMAL, crossinline handler: suspend (E) -> Unit
+inline fun <reified E : Any> EventManager.on(
+  plugin: Any, order: PostOrder = PostOrder.NORMAL, crossinline handler: suspend (E) -> Unit
 ) =
   register(plugin, E::class.java, order) { event ->
     suspendingEventTask {

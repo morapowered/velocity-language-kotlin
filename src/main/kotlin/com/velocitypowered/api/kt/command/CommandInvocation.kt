@@ -8,6 +8,3 @@ inline val CommandInvocation<*>.source: CommandSource
 
 inline val <T> CommandInvocation<T>.arguments: T
   get() = arguments()
-
-inline val CommandInvocation<*>.alias: String
-  get() = alias()
