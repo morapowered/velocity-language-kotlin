@@ -10,7 +10,8 @@ val kotlinVersion = libs.versions.kotlin.get()
 val velocityVersion = libs.versions.velocity.get()
 
 group = "io.github.morapowered"
-version = "$pluginVersion+kotlin.$kotlinVersion"
+val snapshotQualifier = project.findProperty("isSnapshot")?.toString()?.toBoolean()?.let { if (it) "-SNASPHOT" else "" } ?: ""
+version = "$pluginVersion+kotlin.$kotlinVersion$snapshotQualifier"
 
 repositories {
   mavenCentral()
