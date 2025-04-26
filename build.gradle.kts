@@ -3,11 +3,7 @@ plugins {
     signing
 }
 
-
-
 subprojects {
-    group = "io.github.morapowered"
-
     repositories {
         mavenCentral()
         maven("https://repo.papermc.io/repository/maven-public/")
