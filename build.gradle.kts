@@ -23,13 +23,3 @@ nexusPublishing {
     }
 }
 
-signing {
-    val signedKey = project.findProperty("signed.key")?.toString() ?: System.getenv("GPG_SECRET_KEY")
-    val signedPassword = project.findProperty("signed.password")?.toString() ?: System.getenv("GPG_PASSPHRASE")
-
-    if (signedKey != null && signedPassword != null) {
-        useInMemoryPgpKeys(signedKey, signedPassword)
-    } else {
-        useGpgCmd()
-    }
-}
