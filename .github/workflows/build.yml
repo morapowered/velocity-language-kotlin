@@ -23,3 +23,6 @@ jobs:
           gradle-version: wrapper
       - name: Build
         run: gradle build
+      - name: Publish SNAPSHOT
+        if: ${{ github.ref_name == 'dev' }}
+        run: gradle publishToSonatype

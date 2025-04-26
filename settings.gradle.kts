@@ -6,3 +6,6 @@ pluginManagement {
     gradlePluginPortal()
   }
 }
+
+include(":api")
+include(":plugin")

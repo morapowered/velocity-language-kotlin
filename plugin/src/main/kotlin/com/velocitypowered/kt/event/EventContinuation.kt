@@ -1,8 +1,9 @@
-package com.velocitypowered.api.kt.event
+package com.velocitypowered.kt.event
 
 import com.google.common.reflect.TypeToken
 import com.velocitypowered.api.event.EventManager
 import com.velocitypowered.api.event.EventTask
+import com.velocitypowered.api.kt.event.suspendingEventTask
 import org.slf4j.Logger
 import java.lang.reflect.Method
 import java.util.function.BiConsumer

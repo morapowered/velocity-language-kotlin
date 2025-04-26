@@ -26,8 +26,8 @@ inline fun <reified E : Any> EventManager.on(
  * Marks the specified function as a suspended function, which uses the event continuation system in
  * Velocity to allow you to process the event in a non-blocking way.
  */
-@PublishedApi
-internal fun suspendingEventTask(handler: suspend () -> Unit): EventTask =
+//@PublishedApi
+fun suspendingEventTask(handler: suspend () -> Unit): EventTask =
   EventTask.withContinuation { continuation ->
     handler.startCoroutine(continuation.asCoroutineContinuation())
   }

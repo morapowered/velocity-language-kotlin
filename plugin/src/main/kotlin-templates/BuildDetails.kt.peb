@@ -1,0 +1,11 @@
+package com.velocitypowered.api.kt.util;
+
+object BuildDetails {
+
+    const val VERSION = "{{ version }}"
+    const val SNAPSHOT = {{ isSnapshot }}
+
+    const val BUILD = "{{ build | default("Not Specified") }}"
+    const val BRANCH = "{{ branch | default("Not Specified") }}"
+
+}
