@@ -25,6 +25,23 @@ dependencies {
     api(libs.configurateExtraKotlin)
 }
 
+java {
+    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+
+    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_17
+
+    withJavadocJar()
+    withSourcesJar()
+}
+
+tasks {
+    withType<JavaCompile> {
+        options.release = 17
+        options.encoding = "UTF-8"
+    }
+}
+
 publishing {
     publications {
         create<MavenPublication>(project.name) {
