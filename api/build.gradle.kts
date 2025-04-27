@@ -49,6 +49,7 @@ publishing {
 
             pom {
                 name.set("velocity-language-kotlin")
+                description.set("A fork of velocity-language-kotlin for Velocity programming in Kotlin")
                 url.set("https://github.com/morapowered/velocity-language-kotlin")
 
                 licenses {
