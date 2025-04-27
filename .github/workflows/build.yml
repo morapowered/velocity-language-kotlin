@@ -28,9 +28,14 @@ jobs:
           gradle-version: wrapper
       - name: Build
         run: gradle build
+      - name: Upload Artefacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: artefact
+          path: plugin/build/libs/*.jar
       - name: Publish SNAPSHOT
         if: ${{ github.ref_name == 'dev' }}
-        run: gradle publishToSonatype
+        run: gradle publishToSonatype closeAndReleaseSonatypeStagingRepository
         env:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
