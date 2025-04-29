@@ -13,6 +13,10 @@ val snapshotQualifier =
     project.findProperty("isSnapshot")?.toString()?.toBoolean()?.let { if (it) "-SNASPHOT" else "" } ?: ""
 version = "$pluginVersion+kotlin.$kotlinVersion$snapshotQualifier"
 
+base {
+    archivesName.set("velocity-language-kotlin-${project.name}")
+}
+
 repositories {
     mavenCentral()
 }
@@ -46,6 +50,10 @@ publishing {
     publications {
         create<MavenPublication>(project.name) {
             from(components["java"])
+
+            groupId = "io.morapowered"
+            artifactId = "velocity-language-kotlin"
+            version = project.version.toString()
 
             pom {
                 name.set("velocity-language-kotlin")
