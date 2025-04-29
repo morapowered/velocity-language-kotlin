@@ -10,7 +10,7 @@ val pluginVersion: String by project
 val kotlinVersion = libs.versions.kotlin.get()
 val velocityVersion = libs.versions.velocity.get()
 val snapshotQualifier =
-    project.findProperty("isSnapshot")?.toString()?.toBoolean()?.let { if (it) "-SNASPHOT" else "" } ?: ""
+    project.findProperty("isSnapshot")?.toString()?.toBoolean()?.let { if (it) "-SNAPSHOT" else "" } ?: ""
 version = "$pluginVersion+kotlin.$kotlinVersion$snapshotQualifier"
 
 base {
