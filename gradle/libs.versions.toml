@@ -2,7 +2,6 @@
 velocity = "3.4.0-SNAPSHOT"
 kotlin = "2.1.20"
 shadow = "8.1.1"
-nexusPublishPlugin = "2.0.0"
 versioning = "3.1.0"
 blossom = "2.1.0"
 coroutines = "1.10.1"
@@ -48,7 +47,6 @@ kotlinJvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlinKapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlinPluginSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
-nexusPublishPlugin = { id = "io.github.gradle-nexus.publish-plugin", version.ref = "nexusPublishPlugin" }
 versioning = { id = "net.nemerosa.versioning", version.ref = "versioning" }
 blossom = { id = "net.kyori.blossom", version.ref = "blossom" }
 
