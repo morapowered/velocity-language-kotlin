@@ -3,7 +3,11 @@ plugins {
     signing
 }
 
+
+
 subprojects {
+    group = "io.github.morapowered"
+
     repositories {
         mavenCentral()
         maven("https://repo.papermc.io/repository/maven-public/")
@@ -23,3 +27,13 @@ nexusPublishing {
     }
 }
 
+signing {
+    val signedKey = project.findProperty("signed.key")?.toString() ?: System.getenv("GPG_SECRET_KEY")
+    val signedPassword = project.findProperty("signed.password")?.toString() ?: System.getenv("GPG_PASSPHRASE")
+
+    if (signedKey != null && signedPassword != null) {
+        useInMemoryPgpKeys(signedKey, signedPassword)
+    } else {
+        useGpgCmd()
+    }
+}
